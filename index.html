@@ -1,0 +1,363 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VALOBOOST — Профессиональный буст в Valorant</title>
+    <!-- Подключаем стильный шрифт Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Сброс базовых стилей */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        :root {
+            --val-red: #FF4655;
+            --val-dark: #0F1923;
+            --val-card: #1F2326;
+            --val-text: #ECE8E1;
+            --val-gray: #768079;
+        }
+
+        body {
+            background-color: var(--val-dark);
+            color: var(--val-text);
+            line-height: 1.6;
+        }
+
+        /* Навигация */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: rgba(15, 25, 35, 0.95);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 70, 85, 0.2);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: #fff;
+        }
+
+        .logo span {
+            color: var(--val-red);
+        }
+
+        nav a {
+            color: var(--val-text);
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--val-red);
+        }
+
+        .btn-main {
+            background-color: var(--val-red);
+            color: #fff;
+            padding: 12px 28px;
+            border: none;
+            font-weight: 800;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+            clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-main:hover {
+            background-color: #e03e4d;
+            transform: translateY(-2px);
+        }
+
+        /* Главный баннер (Hero) */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            background: linear-gradient(180deg, rgba(15,25,35,0.7) 0%, rgba(15,25,35,1) 100%), 
+                        url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1600') center/cover;
+            margin-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+        }
+
+        .hero h1 span {
+            color: var(--val-red);
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 600px;
+            color: var(--val-gray);
+            margin-bottom: 30px;
+        }
+
+        /* Секции */
+        section {
+            padding: 80px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 50px;
+            letter-spacing: 2px;
+        }
+
+        .section-title span {
+            color: var(--val-red);
+        }
+
+        /* Калькулятор Буста */
+        .calculator {
+            background: var(--val-card);
+            border-radius: 8px;
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            border: 1px solid #2a3038;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .calc-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 36px; }
+        }
+
+        .calc-box label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-size: 14px;
+            color: var(--val-gray);
+        }
+
+        .calc-box select {
+            width: 100%;
+            padding: 15px;
+            background: var(--val-dark);
+            border: 1px solid #333;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .calc-box select:focus {
+            border-color: var(--val-red);
+        }
+
+        .price-box {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+
+        .price-title {
+            font-size: 16px;
+            color: var(--val-gray);
+            text-transform: uppercase;
+        }
+
+        .price-value {
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--val-red);
+            margin: 10px 0;
+        }
+
+        /* Преимущества */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--val-card);
+            padding: 30px;
+            border-left: 4px solid var(--val-red);
+            border-radius: 4px;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .feature-card p {
+            color: var(--val-gray);
+            font-size: 14px;
+        }
+
+        /* Подвал */
+        footer {
+            background: #080d12;
+            padding: 40px 8%;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--val-gray);
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Шапка -->
+    <header>
+        <div class="logo">VALO<span>BOOST</span></div>
+        <nav>
+            <a href="#calculator">Калькулятор</a>
+            <a href="#features">Преимущества</a>
+            <a href="#contact">Контакты</a>
+        </nav>
+        <a href="#calculator" class="btn-main">Заказать</a>
+    </header>
+
+    <!-- Главный баннер -->
+    <section class="hero">
+        <h1>Подними свой ранг в <span>Valorant</span></h1>
+        <p>Быстрый, безопасный и анонимный буст от игроков уровня Radiant. Начни побеждать прямо сейчас!</p>
+        <a href="#calculator" class="btn-main">Рассчитать стоимость</a>
+    </section>
+
+    <!-- Калькулятор буста -->
+    <section id="calculator">
+        <h2 class="section-title">Калькулятор <span>Буста</span></h2>
+        
+        <div class="calculator">
+            <div class="calc-grid">
+                <div class="calc-box">
+                    <label for="current-rank">Текущий ранг:</label>
+                    <select id="current-rank" onchange="calculatePrice()">
+                        <option value="1">Железо (Iron)</option>
+                        <option value="2">Бронза (Bronze)</option>
+                        <option value="3">Серебро (Silver)</option>
+                        <option value="4">Золото (Gold)</option>
+                        <option value="5">Платина (Platinum)</option>
+                        <option value="6">Алмаз (Diamond)</option>
+                        <option value="7">Расцвет (Ascendant)</option>
+                    </select>
+                </div>
+
+                <div class="calc-box">
+                    <label for="desired-rank">Желаемый ранг:</label>
+                    <select id="desired-rank" onchange="calculatePrice()">
+                        <option value="2">Бронза (Bronze)</option>
+                        <option value="3">Серебро (Silver)</option>
+                        <option value="4" selected>Золото (Gold)</option>
+                        <option value="5">Платина (Platinum)</option>
+                        <option value="6">Алмаз (Diamond)</option>
+                        <option value="7">Расцвет (Ascendant)</option>
+                        <option value="8">Бессмертный (Immortal)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="price-box">
+                <div class="price-title">Итоговая стоимость:</div>
+                <div class="price-value" id="total-price">500 ₽</div>
+                <button class="btn-main" onclick="alert('Для оформления заказа напишите нам в Telegram!')">Оформить заказ</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Преимущества -->
+    <section id="features">
+        <h2 class="section-title">Почему <span>Мы?</span></h2>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>🔒 Полная безопасность</h3>
+                <p>Мы используем VPN вашей страны и города. Ваш аккаунт в 100% безопасности от банов.</p>
+            </div>
+            <div class="feature-card">
+                <h3>⚡ Высокая скорость</h3>
+                <p>Выполнение заказа начинается в течение 15 минут после оплаты. Бустеры играют по 8-10 часов в день.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🏆 Игроки Radiant</h3>
+                <p>Все наши бустеры — проверенные игроки уровня Radiant и киберспортсмены.</p>
+            </div>
+            <div class="feature-card">
+                <h3>STREAM Онлайн стрим</h3>
+                <p>По желанию вы можете следить за процессом буста на закрытой трансляции в Twitch или Discord.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты и подвал -->
+    <footer id="contact">
+        <p style="margin-bottom: 10px;">Связь с нами: <strong>Telegram: @your_boost_admin</strong> | <strong>Discord: server_link</strong></p>
+        <p>&copy; 2026 VALOBOOST. All rights reserved. Valorant is a registered trademark of Riot Games, Inc.</p>
+    </footer>
+
+    <!-- Скрипт калькулятора -->
+    <script>
+        function calculatePrice() {
+            const currentRank = parseInt(document.getElementById('current-rank').value);
+            const desiredRank = parseInt(document.getElementById('desired-rank').value);
+            const priceElement = document.getElementById('total-price');
+
+            if (desiredRank <= currentRank) {
+                priceElement.innerText = "Ошибка";
+                return;
+            }
+
+            // Цены за 1 ранг разницы (примерные)
+            const pricePerTier = 350; 
+            const rankDifference = desiredRank - currentRank;
+            
+            const totalPrice = rankDifference * pricePerTier;
+            priceElement.innerText = totalPrice + " ₽";
+        }
+
+        // Автоматический расчет при загрузке
+        calculatePrice();
+    </script>
+</body>
+</html>
+code (1).html
+Displaying code (1).html.

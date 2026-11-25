@@ -1,0 +1,14 @@
+<head>
+    <meta charset="UTF-8">
+    <title>Мой сайт</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+body {
+    background-color: black;
+    color: red;
+}
+
+h1 {
+    color: darkblue;
+}
+
